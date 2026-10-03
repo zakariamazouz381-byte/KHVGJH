@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}</style>
+<title>Assia Amrouch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Gloock&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: left-aligned name-first hero beside a slowly turning zellige star, then a letter on paper, a two-column list of reasons, and a closing tap that releases hearts. */
+:root {
+  --bg: #FBF0EF;
+  --surface: #FFF8F7;
+  --ink: #3B1425;
+  --muted: #7A5465;
+  --accent: #B3173E;
+  --blush: #E6718B;
+  --on-accent: #FFF6F7;
+  --line: #E3C6CC;
+  --display: 'Gloock', Georgia, 'Times New Roman', serif;
+  --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --arabic: 'Aref Ruqaa', 'Amiri', 'Noto Naskh Arabic', serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1D0E19;
+    --surface: #281522;
+    --ink: #F9E9EC;
+    --muted: #C9A5B2;
+    --accent: #FF7F98;
+    --blush: #FFB6C4;
+    --on-accent: #2B0E1A;
+    --line: #4B2A3D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1D0E19;
+  --surface: #281522;
+  --ink: #F9E9EC;
+  --muted: #C9A5B2;
+  --accent: #FF7F98;
+  --blush: #FFB6C4;
+  --on-accent: #2B0E1A;
+  --line: #4B2A3D;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  padding-inline: clamp(16px, 5vw, 56px);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, p, ul { margin: 0; }
+.wrap { max-width: 1080px; margin-inline: auto; position: relative; z-index: 1; }
+
+/* Zellige pattern behind the hero */
+.bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: min(100%, 880px);
+  z-index: 0; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+.bg svg { width: 100%; height: 100%; display: block; }
+.z { fill: none; stroke: var(--line); stroke-width: 1; }
+
+/* Hero */
+.hero {
+  display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center;
+  padding-block: 2.5rem 3.5rem;
+}
+.hero > * { min-width: 0; }
+.medal { width: 92px; order: -1; }
+.medal svg { width: 100%; height: auto; display: block; animation: turn 140s linear infinite; }
+.m1 { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.m2 { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1.4; }
+.m3 { fill: var(--accent); }
+.m4 { fill: none; stroke: var(--line); stroke-width: 1.2; }
+@keyframes turn { to { transform: rotate(360deg); } }
+@media (min-width: 860px) {
+  .hero { grid-template-columns: 1.45fr 1fr; gap: 3rem; padding-block: 4.5rem 5rem; }
+  .medal { width: min(100%, 340px); order: 0; justify-self: center; }
+}
+.eyebrow {
+  display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+}
+.ar-name { font-family: var(--arabic); font-size: 1.6rem; letter-spacing: 0; text-transform: none; color: var(--accent); line-height: 1; }
+.name {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(4.2rem, 17vw, 10.5rem); line-height: 0.92; letter-spacing: -0.02em;
+  color: var(--ink); margin-top: 0.15em;
+}
+.surname {
+  font-size: clamp(0.95rem, 2.6vw, 1.3rem); font-weight: 600; letter-spacing: 0.42em;
+  text-transform: uppercase; color: var(--accent); margin-top: 1rem;
+}
+.phrase {
+  font-family: var(--display); font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.15;
+  color: var(--accent); margin-top: 1.75rem; min-height: 1.3em;
+}
+.phrase:lang(ar) { font-family: var(--arabic); font-size: 1.2em; }
+.phrase.swap { animation: rise 0.45s ease both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.chip {
+  font: 500 0.88rem var(--sans); color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.55rem 1rem; min-height: 44px;
+  cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.chip:lang(ar) { font-family: var(--arabic); font-size: 1.1rem; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.chip:focus-visible, .love:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Letter */
+.letter { display: grid; grid-template-columns: 1fr; gap: 1.75rem; padding-block: 3rem; }
+.letter > * { min-width: 0; }
+@media (min-width: 860px) { .letter { grid-template-columns: 1fr 1.7fr; gap: 4rem; padding-block: 4rem; } }
+h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; text-wrap: balance; }
+.kicker { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem; }
+.paper {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+.paper p { max-width: 34rem; margin-bottom: 1.1em; }
+.greet { font-family: var(--display); font-size: 1.7rem; color: var(--accent); }
+.sign { font-family: var(--display); font-size: 1.35rem; margin: 1.5rem 0 0 !important; }
+
+/* Reasons */
+.reasons { padding-block: 3rem; }
+.reasons ul {
+  list-style: none; padding: 0; margin-top: 2rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1.75rem 3rem;
+}
+.reasons li { display: flex; gap: 0.9rem; border-top: 1px solid var(--line); padding-top: 1rem; min-width: 0; }
+.reasons svg { flex: none; width: 24px; height: 24px; margin-top: 0.2rem; }
+.i1 { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.i2 { fill: var(--accent); }
+
+/* Finale */
+.finale { padding-block: 3.5rem 4.5rem; }
+.finale h2 { font-size: clamp(2.6rem, 9vw, 6rem); line-height: 1; max-width: 12ch; }
+.love {
+  font: 600 1rem var(--sans); background: var(--accent); color: var(--on-accent);
+  border: 0; border-radius: 999px; padding: 0.95rem 1.7rem; min-height: 48px; margin-top: 2rem;
+  cursor: pointer; transition: transform 0.15s;
+}
+.love:hover { transform: translateY(-1px); }
+.love:active { transform: scale(0.98); }
+.reply { font-family: var(--display); font-size: 1.35rem; color: var(--muted); margin-top: 1.1rem; min-height: 1.7em; }
+
+footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem;
+  border-top: 1px solid var(--line); padding-block: 1.5rem 2rem;
+  font-size: 0.9rem; color: var(--muted);
+}
+footer .ar { font-family: var(--arabic); font-size: 1.25rem; color: var(--accent); line-height: 1; }
+
+#fx { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+
+@media (prefers-reduced-motion: reduce) {
+  .medal svg, .phrase.swap { animation: none; }
+  .chip, .love { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+    <defs>
+      <pattern id="zl" width="96" height="96" patternUnits="userSpaceOnUse">
+        <g class="z">
+          <rect x="28" y="28" width="40" height="40"/>
+          <rect x="28" y="28" width="40" height="40" transform="rotate(45 48 48)"/>
+          <rect x="-5" y="-5" width="10" height="10" transform="rotate(45 0 0)"/>
+          <rect x="91" y="-5" width="10" height="10" transform="rotate(45 96 0)"/>
+          <rect x="-5" y="91" width="10" height="10" transform="rotate(45 0 96)"/>
+          <rect x="91" y="91" width="10" height="10" transform="rotate(45 96 96)"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#zl)"/>
+  </svg>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="medal" aria-hidden="true">
+      <svg viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle class="m4" r="94"/>
+        <rect class="m1" x="-78" y="-78" width="156" height="156"/>
+        <rect class="m1" x="-78" y="-78" width="156" height="156" transform="rotate(45)"/>
+        <rect class="m2" x="-52" y="-52" width="104" height="104"/>
+        <rect class="m2" x="-52" y="-52" width="104" height="104" transform="rotate(45)"/>
+        <circle class="m4" r="30"/>
+        <circle class="m3" r="9"/>
+      </svg>
+    </div>
+    <div>
+      <p class="eyebrow">For <span class="ar-name" lang="ar">آسية عمروش</span></p>
+      <h1 class="name">Assia</h1>
+      <p class="surname">Amrouch</p>
+      <p class="phrase" id="phrase" lang="en">I love you</p>
+      <div class="chips" role="group" aria-label="Choose a language">
+        <button class="chip" type="button" data-text="I love you" data-lang="en" aria-pressed="true">English</button>
+        <button class="chip" type="button" data-text="Kanbghik" data-lang="ary-Latn" aria-pressed="false">Darija</button>
+        <button class="chip" type="button" data-text="أحبك" data-lang="ar" lang="ar" aria-pressed="false">العربية</button>
+        <button class="chip" type="button" data-text="Je t'aime" data-lang="fr" aria-pressed="false">Français</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="letter" aria-labelledby="letter-h">
+      <div>
+        <p class="kicker">A letter</p>
+        <h2 id="letter-h">A few words for you</h2>
+      </div>
+      <div class="paper">
+        <p class="greet">Assia,</p>
+        <p>I wanted to tell you this somewhere you can come back to, so I made you a page. It has your name on it because every good thing I feel starts there.</p>
+        <p>You are the first person I want to tell when something good happens. Days feel lighter with you in them, and I am grateful for every one.</p>
+        <p>I love you. I say it often and I mean it a little more each time. Thank you for being you.</p>
+        <p class="sign">Yours, always</p>
+      </div>
+    </section>
+
+    <section class="reasons" aria-labelledby="reasons-h">
+      <h2 id="reasons-h">Why I love you</h2>
+      <ul>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>You make ordinary days feel like something to look forward to.</span></li>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>You are kind in ways you never announce.</span></li>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>Quiet time with you is enough.</span></li>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>You make me want to be a better person.</span></li>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>You listen, and I can tell you mean it.</span></li>
+        <li><svg viewBox="-12 -12 24 24" aria-hidden="true"><rect class="i1" x="-7" y="-7" width="14" height="14"/><rect class="i1" x="-7" y="-7" width="14" height="14" transform="rotate(45)"/><circle class="i2" r="2"/></svg><span>I feel at home wherever you are.</span></li>
+      </ul>
+    </section>
+
+    <section class="finale" aria-labelledby="finale-h">
+      <h2 id="finale-h">I love you, Assia.</h2>
+      <button class="love" id="love" type="button">Tap if you love me too</button>
+      <p class="reply" id="reply" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Made for Assia Amrouch</span>
+    <span class="ar" lang="ar">بكل حب</span>
+  </footer>
+</div>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Language switcher */
+  var phrase = document.getElementById('phrase');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cur = 0, timer = null;
+  function show(i) {
+    cur = i;
+    chips.forEach(function (c, k) { c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    phrase.textContent = chips[i].getAttribute('data-text');
+    phrase.setAttribute('lang', chips[i].getAttribute('data-lang'));
+    phrase.classList.remove('swap');
+    void phrase.offsetWidth;
+    phrase.classList.add('swap');
+  }
+  chips.forEach(function (c, k) {
+    c.addEventListener('click', function () {
+      if (timer) { clearInterval(timer); timer = null; }
+      show(k);
+    });
+  });
+  if (!reduce) {
+    timer = setInterval(function () { show((cur + 1) % chips.length); }, 4200);
+  }
+
+  /* Hearts */
+  var cv = document.getElementById('fx');
+  var ctx = cv.getContext('2d');
+  var parts = [], raf = 0, W = 0, H = 0;
+  function size() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  function drawHeart(p) {
+    var s = p.s;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.r);
+    ctx.globalAlpha = Math.max(0, p.life / p.max);
+    ctx.fillStyle = p.c;
+    ctx.beginPath();
+    ctx.moveTo(0, s * 0.3);
+    ctx.bezierCurveTo(-s * 0.9, -s * 0.3, -s * 0.5, -s * 0.95, 0, -s * 0.45);
+    ctx.bezierCurveTo(s * 0.5, -s * 0.95, s * 0.9, -s * 0.3, 0, s * 0.3);
+    ctx.fill();
+    ctx.restore();
+  }
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    parts = parts.filter(function (p) { return p.life > 0; });
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.vx *= 0.99; p.r += p.vr; p.life--;
+      drawHeart(p);
+    });
+    if (parts.length) { raf = requestAnimationFrame(tick); }
+    else { raf = 0; ctx.clearRect(0, 0, W, H); }
+  }
+  function burst(x, y) {
+    var cs = getComputedStyle(document.documentElement);
+    var cols = [cs.getPropertyValue('--accent').trim() || '#B3173E', cs.getPropertyValue('--blush').trim() || '#E6718B'];
+    for (var i = 0; i < 28; i++) {
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.1;
+      var v = 3 + Math.random() * 5;
+      var life = 80 + Math.random() * 50;
+      parts.push({
+        x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        r: (Math.random() - 0.5) * 0.6, vr: (Math.random() - 0.5) * 0.08,
+        s: 8 + Math.random() * 12, c: cols[Math.random() < 0.5 ? 0 : 1],
+        life: life, max: life
+      });
+    }
+    if (!raf) { raf = requestAnimationFrame(tick); }
+  }
+
+  var btn = document.getElementById('love');
+  var reply = document.getElementById('reply');
+  var replies = [
+    'I knew it. I love you more.',
+    'Say it again. I never get tired of hearing it.',
+    'Then it is settled. I am yours.'
+  ];
+  var taps = 0;
+  btn.addEventListener('click', function () {
+    reply.textContent = replies[taps % replies.length];
+    taps++;
+    if (!reduce) {
+      var r = btn.getBoundingClientRect();
+      burst(r.left + r.width / 2, r.top + r.height / 2);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
